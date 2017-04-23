@@ -70,11 +70,11 @@ for i in range(iterations):
         wins += 1
         net.batch(acts_list, zs_list, moves_made, learning_rate)
     elif result == 3:
-        losses += 1
-        net.batch(acts_list, zs_list, moves_made, -learning_rate)
-    elif result == 4:
         draws += 1
         net.batch(acts_list, zs_list, moves_made, learning_rate)
+    elif result == 4:
+        losses += 1
+        net.batch(acts_list, zs_list, moves_made, -learning_rate)
 
 
     print("Games:%d, Wins: %d, Losses %d, Draws: %d, Win Rate: %f" %(games, wins, losses, draws, (float(wins+draws)/games)), end = "\r")
