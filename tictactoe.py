@@ -81,7 +81,6 @@ class tictactoe:
         return self.board[int(coord/self.size)][int(coord%self.size)] == 0
 
 
-
     # Returns a random valid move as a tuple
     def random_move(self):
         return choice([x for x in range(self.size**2) if self.is_valid(x)])

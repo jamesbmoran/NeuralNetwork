@@ -1,5 +1,5 @@
 from numpy import *
-import _pickle as p
+import pickle, os
 
 class neuralnetwork:
     def __init__(self, structure, fun, funPrime):
@@ -79,9 +79,16 @@ class neuralnetwork:
     def cost_function(self, output, correct):
         return output - correct
 
-    def save(self, filename):
-        with open(filename, 'wb') as output:
-            p.dump(obj, output, -1)
+    def save_net(self, filename):
+        directory = os.getcwd()
+        with open(directory + "/" + filename, 'wb') as output:
+            pickle.dump(self, output)
+
+
+def load_net(filename):
+    directory = os.getcwd()
+    loaded_net = pickle.load(open(directory + '/' + filename, 'rb'))
+    return loaded_net
 
 def sigmoid(x):
     return 1.0/(1.0 + exp(-x))
