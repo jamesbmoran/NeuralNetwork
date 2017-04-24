@@ -1,6 +1,6 @@
 
 from numpy import *
-from random import *
+from random import choice
 from copy import deepcopy
 # Simple implementation of tic-tac-toe for testing neural network
 
@@ -101,9 +101,11 @@ class tictactoe:
                     move_scores.append((m, self.min_move(b)))
 
         if self.a:
-            return min(move_scores, key=lambda x:x[1])[0]
+            minscore = min(move_scores, key=lambda x:x[1])[1]
+            return choice(list(filter(lambda x: x[1] == minscore, move_scores)))[0]
         else:
-            return max(move_scores, key=lambda x:x[1])[0]
+            maxscore = max(move_scores, key=lambda x:x[1])[1]
+            return choice(list(filter(lambda x: x[1] == maxscore, move_scores)))[0]
 
     def max_move(self, next_board):
         # Finding valid moves

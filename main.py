@@ -19,17 +19,25 @@ games = 1
 # Loading or making a new net
 start = False
 while not start:
-    net_type = input("'N' for new net, 'L' to load a saved net: ")
-    if (net_type == 'N'):
+    net_type = input("'n' for new net, 'l' to load a saved net: ")
+    if (net_type == 'n'):
         net = neuralnetwork([9, 1000, 100, 50, 9], sigmoid, sigmoidPrime)
         start = True
-    elif (net_type == 'L'):
+    elif (net_type == 'l'):
         load_file = input("Enter file with saved net: ")
         net = load_net(load_file)
         start = True
 
+training_chosen = False
+while not training_chosen:
+    training_type = input("'r' for random training, 'g' for training against perfect player: ")
+    if(training_type == 'r'):
+        training_chosen = True
+    elif(training_type == 'g'):
+        training_chosen = True
+
 iterations = int(input("Number of iterations: "))
-net_file = input("Enter file name: ")
+net_file = input("Enter output file name: ")
 
 for i in range(iterations):
     # Initalise list for training
@@ -64,7 +72,10 @@ for i in range(iterations):
             # Make the move
             result = board.move(net_move)
         else:
-            result = board.move(board.random_move())
+            if(training_type == 'r'):
+                result = board.move(board.random_move())
+            else:
+                result = board.move(board.good_move())
 
     if result == 2:
         wins += 1
